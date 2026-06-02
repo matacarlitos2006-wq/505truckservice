@@ -1104,3 +1104,55 @@ section,
     font-size: 0.85rem;
     margin: 0;
 }
+
+
+.location-banner {
+    background-color: #f1f5f9; /* Light, neutral background */
+    border-bottom: 1px solid #e2e8f0;
+    padding: 12px 20px; /* Slim vertical spacing */
+    margin-top: 80px; /* Adjust to match your navbar's height */
+    margin-bottom: 1px; /* Small gap before your main content */
+    font-family: Arial, sans-serif;
+}
+
+
+[data-theme="dark"] .location-banner {
+    background-color: #1e293b;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.location-banner-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Centers the text; change to flex-start to left-align */
+    gap: 8px;
+}
+
+.location-dot {
+    width: 8px;
+    height: 8px;
+    background-color: #e53935; /* Accent red indicator dot */
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.location-banner p {
+    font-size: 0.95rem;
+    color: #334155;
+    margin: 0;
+}
+
+[data-theme="dark"] .location-banner p {
+    color: #cbd5e1;
+}
+
+.location-banner strong {
+    color: #111111;
+    font-weight: 700;
+}
+
+[data-theme="dark"] .location-banner strong {
+    color: #ffffff;
+}
