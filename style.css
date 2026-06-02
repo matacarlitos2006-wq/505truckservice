@@ -1029,3 +1029,78 @@ section,
     padding-bottom: 60px;    /* Internal spacing at the bottom of the section */
     position: relative;      /* Ensures layout structural containment */
 }
+
+
+.footer-corporate {
+    background-color: #ffffff;
+    border-top: 1px solid #edf2f7;
+    padding: 80px 20px 30px 20px;
+    margin-top: 120px; /* Big top gap to separate it from the content above */
+    font-family: Arial, sans-serif;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 40px;
+}
+
+.footer-column h3 {
+    font-size: 1.4rem;
+    color: #111111;
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+.footer-column h4 {
+    font-size: 1rem;
+    color: #111111;
+    margin-bottom: 20px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.footer-column p {
+    color: #64748b;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.footer-column ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-column ul li {
+    margin-bottom: 12px;
+    color: #64748b;
+    font-size: 0.95rem;
+}
+
+.footer-column ul li a {
+    color: #64748b;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.footer-column ul li a:hover {
+    color: #e53935;
+}
+
+.footer-bottom {
+    max-width: 1200px;
+    margin: 60px auto 0 auto;
+    padding-top: 25px;
+    border-top: 1px solid #edf2f7;
+    text-align: center;
+}
+
+.footer-bottom p {
+    color: #94a3b8;
+    font-size: 0.85rem;
+    margin: 0;
+}
