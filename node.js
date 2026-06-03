@@ -142,3 +142,21 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+    const toggleButtons = document.querySelectorAll('.reveal-toggle-btn');
+
+    toggleButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const card = btn.parentElement;
+            card.classList.toggle('is-open');
+
+            // Toggle active button text for accurate labeling
+            if (card.classList.contains('is-open')) {
+                btn.textContent = 'Hide Plan Details';
+            } else {
+                btn.textContent = 'View Full Plan';
+            }
+        });
+    });
+});
