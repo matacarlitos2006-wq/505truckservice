@@ -1156,3 +1156,104 @@ section,
 [data-theme="dark"] .location-banner strong {
     color: #ffffff;
 }
+
+.reveal-grid {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+.reveal-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 30px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+    overflow: hidden;
+    transition: box-shadow 0.3s ease;
+}
+
+.reveal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.reveal-header h3 {
+    margin: 0;
+    font-size: 1.25rem;
+    color: #111111;
+}
+
+.reveal-price {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: #e53935;
+}
+
+.reveal-summary {
+    color: #475569;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin: 0 0 20px 0;
+}
+
+/* Hidden by default with smooth height transitions */
+.reveal-hidden-content {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.4s cubic-bezier(0, 1, 0, 1), opacity 0.3s ease;
+}
+
+.reveal-hidden-content hr {
+    border: 0;
+    height: 1px;
+    background: #e2e8f0;
+    margin: 15px 0;
+}
+
+.reveal-hidden-content h4 {
+    margin: 0 0 10px 0;
+    font-size: 0.9rem;
+}
+
+.reveal-hidden-content ul {
+    padding-left: 20px;
+    margin: 0;
+}
+
+.reveal-hidden-content ul li {
+    font-size: 0.85rem;
+    color: #64748b;
+    margin-bottom: 8px;
+}
+
+/* Open State Modifications via JS class toggle */
+.reveal-card.is-open .reveal-hidden-content {
+    max-height: 500px; /* Big enough limit to display content */
+    opacity: 1;
+    transition: max-height 0.4s cubic-bezier(1, 0, 1, 0), opacity 0.3s ease;
+}
+
+.reveal-toggle-btn {
+    width: 100%;
+    background: #f1f5f9;
+    color: #1e293b;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background 0.2s, color 0.2s;
+}
+
+.reveal-toggle-btn:hover {
+    background: #111111;
+    color: #ffffff;
+}
