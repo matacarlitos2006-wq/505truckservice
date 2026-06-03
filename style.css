@@ -1257,3 +1257,52 @@ section,
     background: #111111;
     color: #ffffff;
 }
+
+.hero-image-layout {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+    font-family: Arial, sans-serif;
+}
+
+/* --- Title Styling --- */
+.title-container {
+    text-align: center;
+    margin-bottom: 30px; /* Space between title and the image below */
+}
+
+.accent-title {
+    color: #e53935; /* Crisp, highly visible red */
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin: 0 0 10px 0;
+    letter-spacing: -1px;
+    text-transform: uppercase;
+}
+
+.subtitle-text {
+    color: #475569;
+    font-size: 1.1rem;
+    margin: 0;
+}
+
+/* --- Image Framework --- */
+.image-wrapper {
+    width: 100%;
+    height: 450px; /* Fixed height for the showcase area */
+    border-radius: 16px;
+    overflow: hidden; /* Keeps the image corners rounded */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    background-color: #f1f5f9; /* Skeleton background color while loading */
+}
+
+.image-wrapper img {
+    width: 100%;
+    height: 100%;
+    /* Crucial properties to prevent stretching and distortion: */
+    object-fit: cover; 
+    object-position: center; 
+    display: block;
+}
+
+
