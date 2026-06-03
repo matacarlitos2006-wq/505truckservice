@@ -90,6 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
             replyMessage = "Feel free to email our support team directly at @gmail.com or our phone number.";
         } else if (cleanText.includes('address') || cleanText.includes('location') || cleanText.includes('located'){
             replyMessage = "In Gallup we are located at: 19 U.S. Route 66, Gallup, NM 87301. While Milan's: 712 U.S. Route 66, Milan, NM 87021.";
+        }
             
 
         replyDiv.innerHTML = `<p>${replyMessage}</p>`;
