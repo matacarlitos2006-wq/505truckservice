@@ -85,11 +85,13 @@ document.addEventListener('DOMContentLoaded', () => {
         } else if (cleanText.includes('contact') || cleanText.includes('form') || cleanText.includes('submit')) {
             replyMessage = "You can fill out our contact form directly on this page to submit your details or file uploads.";
         } else if (cleanText.includes('phone') || cleanText.includes('call')) {
-            replyMessage = "You can reach our main office line at (505) 726-3225.";
+            replyMessage = "You can reach our main office line at (505) 726-3225 for Gallup. And (505) 290-9862 for Milan";
         } else if (cleanText.includes('email') || cleanText.includes('message')) {
             replyMessage = "Feel free to email our support team directly at @gmail.com or our phone number.";
         } else if (cleanText.includes('address') || cleanText.includes('location') || cleanText.includes('located')) {
             replyMessage = "In Gallup we are located at: 19 U.S. Route 66, Gallup, NM 87301. While Milan's: 712 U.S. Route 66, Milan, NM 87021.";
+        } else if (cleanText.includes('common tires') || cleanText.includes('tires')) {
+            replyMessage = "Our common tires are Trailer Tires, Steer Tires, and Drive Tires";
         }
             
 
