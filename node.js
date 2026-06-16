@@ -165,3 +165,85 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
+const express = require('express');
+const fs = require('fs');
+const path = require('path');
+const app = express();
+
+app.use(express.json());
+app.use(express.static(__dirname)); // Automatically loads your original index.html, admin.html, and styles.css
+
+const MASTER_PASSWORD = "TruckServiceAdmin505"; // Set your password here
+
+// API ROUTE 1: FINDS TEXT AND SWAPS IT INSIDE INDEX.HTML
+app.post('/api/change-text', (req, res) => {
+    const { password, oldText, newText } = req.body;
+
+    if (password !== MASTER_PASSWORD) {
+        return res.status(401).json({ error: "Access Denied" });
+    }
+
+    const indexPath = path.join(__dirname, 'index.html');
+
+    fs.readFile(indexPath, 'utf8', (err, data) => {
+        if (err) return res.status(500).json({ error: "Could not read index.html" });
+
+        // Ensure the text you want to change actually exists on the page
+        if (!data.includes(oldText)) {
+            return res.status(400).json({ error: "Target string not found inside index.html" });
+        }
+
+        // Replace the old text with the new text globally
+        const updatedHtml = data.split(oldText).join(newText);
+
+        fs.writeFile(indexPath, updatedHtml, 'utf8', (writeErr) => {
+            if (writeErr) return res.status(500).json({ error: "File write failed" });
+            return res.json({ success: true });
+        });
+    });
+});
+
+// API ROUTE 2: INJECTS THE NEW BOX ABOVE YOUR CLOSING MAIN TAG IN INDEX.HTML
+app.post('/api/add-box', (req, res) => {
+    const { password, title, imgUrl, desc } = req.body;
+
+    if (password !== MASTER_PASSWORD) {
+        return res.status(401).json({ error: "Access Denied" });
+    }
+
+    const indexPath = path.join(__dirname, 'index.html');
+
+    fs.readFile(indexPath, 'utf8', (err, data) => {
+        if (err) return res.status(500).json({ error: "Could not read index.html" });
+
+        // Generate the new dynamic block structure using classes from step 1
+        const newBoxHtml = `
+        <div class="truck-service-card">
+            <img src="${imgUrl}" alt="${title}">
+            <div class="truck-service-card-body">
+                <h3>${title}</h3>
+                <p>${desc}</p>
+            </div>
+        </div>
+        `;
+
+        // Look at your index.html and find whatever container element closes your main grid content layout
+        const targetClosingTag = "</main>"; 
+
+        if (!data.includes(targetClosingTag)) {
+            return res.status(400).json({ error: "Could not find target layout element inside your index.html structure." });
+        }
+
+        // Drop the box perfectly right inside the container
+        const updatedHtml = data.replace(targetClosingTag, `${newBoxHtml}\n${targetClosingTag}`);
+
+        fs.writeFile(indexPath, updatedHtml, 'utf8', (writeErr) => {
+            if (writeErr) return res.status(500).json({ error: "File write failed" });
+            return res.json({ success: true });
+        });
+    });
+});
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`Server executing live on http://localhost:${PORT}`));
