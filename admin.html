@@ -1,31 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="styles.css">
-  <title>Admin Dashboard - 505 Truck Service</title>
+  <title>Admin Panel | 505 Truck Service</title>
 </head>
-<body>
+<body class="admin-body">
 
-  <div id="login-box">
-    <h2>Admin Access</h2>
-    <input type="password" id="admin-password" placeholder="Enter Password">
-    <button onclick="login()">Login</button>
+  <div id="login-box" class="admin-card">
+    <h2>Admin Authentication</h2>
+    <div class="admin-input-group">
+      <label for="admin-password">Password</label>
+      <input type="password" id="admin-password" placeholder="••••••••">
+    </div>
+    <button class="admin-btn" onclick="login()">Access Dashboard</button>
   </div>
 
-  <div id="admin-dashboard" style="display: none;">
-    <h2>Edit Website Content</h2>
+  <div id="admin-dashboard" class="admin-card" style="display: none;">
+    <h2>Control Panel</h2>
     
-    <label>Change Main Text:</label>
-    <input type="text" id="edit-welcome-text">
+    <div class="admin-input-group">
+      <label>Hero Welcome Text</label>
+      <input type="text" id="edit-welcome-text">
+    </div>
     
-    <h3>Manage Items</h3>
-    <div id="admin-items-list"></div>
+    <div class="admin-input-group">
+      <label>Active Services / Items</label>
+      <div id="admin-items-list"></div>
+    </div>
     
-    <button onclick="saveChanges()">Save and Publish Changes</button>
+    <button class="admin-btn" onclick="saveChanges()">Publish Changes Live</button>
   </div>
 
   <script>
-    let token = ""; // Holds authorization session
+    let token = "";
+    let currentItems = [];
 
     async function login() {
       const password = document.getElementById('admin-password').value;
@@ -37,13 +47,38 @@
       
       if(res.ok) {
         const result = await res.json();
-        token = result.token; // Save session token
+        token = result.token;
         document.getElementById('login-box').style.display = 'none';
         document.getElementById('admin-dashboard').style.display = 'block';
-        loadAdminFields();
+        
+        // Fetch current data to populate fields automatically
+        const dataRes = await fetch('/api/get-content');
+        const data = await dataRes.json();
+        
+        document.getElementById('edit-welcome-text').value = data.welcomeMessage;
+        currentItems = data.items || [];
+        renderAdminItems();
       } else {
-        alert("Incorrect Password");
+        alert("Access Denied: Invalid Password");
       }
+    }
+
+    function renderAdminItems() {
+      const listDiv = document.getElementById('admin-items-list');
+      listDiv.innerHTML = '';
+      currentItems.forEach((item, index) => {
+        listDiv.innerHTML += `
+          <div class="admin-item-row">
+            <span>${item.name}</span>
+            <button class="delete-btn" onclick="removeItem(${index})">Remove</button>
+          </div>
+        `;
+      });
+    }
+
+    function removeItem(index) {
+      currentItems.splice(index, 1);
+      renderAdminItems();
     }
 
     async function saveChanges() {
@@ -55,11 +90,13 @@
           'Content-Type': 'application/json',
           'Authorization': token 
         },
-        body: JSON.stringify({ welcomeMessage: updatedText, items: [] })
+        body: JSON.stringify({ welcomeMessage: updatedText, items: currentItems })
       });
 
       if(res.ok) {
-        alert("Website updated successfully! Everyone can see it now.");
+        alert("Changes pushed successfully! Refresh your home page to see them.");
+      } else {
+        alert("Error saving updates.");
       }
     }
   </script>
