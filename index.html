@@ -432,6 +432,12 @@
         </div>
   </section>
 
+    <section id="services-section">
+      <h2 id="welcome-text">Loading text...</h2>
+      <div id="items-container">
+        </div>
+    </section>
+
     <footer class="footer-corporate">
         <div class="footer-container">
             <div class="footer-column brand-info">
@@ -464,6 +470,25 @@
         </div>
     </footer>
 
+
+    
+<script>
+  // Automatically load the saved data when anyone opens the website
+  async function loadWebsiteData() {
+    const response = await fetch('/api/get-content');
+    const data = await response.json();
+    
+    // Update the text and elements permanently
+    document.getElementById('welcome-text').innerText = data.welcomeMessage;
+    
+    const container = document.getElementById('items-container');
+    container.innerHTML = ''; // clear loading
+    data.items.forEach(item => {
+      container.innerHTML += `<div class="item-card"><p>${item.name}</p></div>`;
+    });
+  }
+  window.onload = loadWebsiteData;
+</script>
 <script src="node.js"></script>
 </body>
 </html>
