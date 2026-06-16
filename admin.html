@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="styles.css">
+  <title>Admin Dashboard - 505 Truck Service</title>
+</head>
+<body>
+
+  <div id="login-box">
+    <h2>Admin Access</h2>
+    <input type="password" id="admin-password" placeholder="Enter Password">
+    <button onclick="login()">Login</button>
+  </div>
+
+  <div id="admin-dashboard" style="display: none;">
+    <h2>Edit Website Content</h2>
+    
+    <label>Change Main Text:</label>
+    <input type="text" id="edit-welcome-text">
+    
+    <h3>Manage Items</h3>
+    <div id="admin-items-list"></div>
+    
+    <button onclick="saveChanges()">Save and Publish Changes</button>
+  </div>
+
+  <script>
+    let token = ""; // Holds authorization session
+
+    async function login() {
+      const password = document.getElementById('admin-password').value;
+      const res = await fetch('/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password })
+      });
+      
+      if(res.ok) {
+        const result = await res.json();
+        token = result.token; // Save session token
+        document.getElementById('login-box').style.display = 'none';
+        document.getElementById('admin-dashboard').style.display = 'block';
+        loadAdminFields();
+      } else {
+        alert("Incorrect Password");
+      }
+    }
+
+    async function saveChanges() {
+      const updatedText = document.getElementById('edit-welcome-text').value;
+      
+      const res = await fetch('/api/update-content', {
+        method: 'POST',
+        headers: { 
+          'Content-Type': 'application/json',
+          'Authorization': token 
+        },
+        body: JSON.stringify({ welcomeMessage: updatedText, items: [] })
+      });
+
+      if(res.ok) {
+        alert("Website updated successfully! Everyone can see it now.");
+      }
+    }
+  </script>
+</body>
+</html>
