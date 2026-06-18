@@ -40,7 +40,7 @@ body::before {
     background-image: url('./images/pic-truck.png'); 
     background-repeat: no-repeat;
     background-position: center;
-    background-size: 75%;     /* Adjust this percentage to scale logo size */
+    background-size: 65%;     /* Adjust this percentage to scale logo size */
     filter: blur(0px);         /* Adjust pixel amount to alter blur strength */
     opacity: 0.06;             /* Subtle opacity to look clean under text */
     z-index: -1;               /* Places it behind all website elements */
