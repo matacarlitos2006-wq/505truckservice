@@ -258,3 +258,52 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+    const showcaseSection = document.querySelector('.reveal-on-scroll');
+    const typedTitleEl = document.getElementById('typedTitle');
+    
+    // Safety guard to ensure elements exist on the active page canvas
+    if (!showcaseSection || !typedTitleEl) return;
+
+    const fullText = typedTitleEl.getAttribute('data-text');
+    let currentIdx = 0;
+    let typingStarted = false;
+
+    // Typing Engine function loop
+    function typeWords() {
+        if (currentIdx < fullText.length) {
+            typedTitleEl.textContent += fullText.charAt(currentIdx);
+            currentIdx++;
+            // Randomized speed interval variable mimics organic human cadences
+            setTimeout(typeWords, Math.floor(Math.random() * 40) + 60);
+        } else {
+            // Clean up cursor graphic once complete
+            typedTitleEl.classList.add('typing-done');
+        }
+    }
+
+    // Modern Intersection Observer API manages viewport tracking effortlessly
+    const scrollObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            // Trigger animation if item intersects at least 20% deep inside viewport
+            if (entry.isIntersecting) {
+                showcaseSection.classList.add('is-visible');
+                
+                // Fire typing animation exactly once upon scrolling down
+                if (!typingStarted) {
+                    typingStarted = true;
+                    // Slight delay allows the fade glide to finish before text types
+                    setTimeout(typeWords, 400); 
+                }
+                
+                // Clean up observer node process tracking to optimize frame performance
+                observer.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.20
+    });
+
+    scrollObserver.observe(showcaseSection);
+});
