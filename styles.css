@@ -52,7 +52,7 @@ body::before {
     opacity: 0.35; 
     
     /* Boost the actual brightness and contrast of the image */
-    filter: brightness(1.5) contrast(1.2);
+    filter: brightness(3.5) contrast(3.2);
     
     transition: all 0.3s ease;
 }
