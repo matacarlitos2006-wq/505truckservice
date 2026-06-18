@@ -47,6 +47,22 @@ body::before {
     pointer-events: none;      /* Prevents it from hijacking link/button clicks */
 }
 
+.background-logo {
+    /* If opacity is set too low (e.g., 0.1), raise it slightly */
+    opacity: 0.35; 
+    
+    /* Boost the actual brightness and contrast of the image */
+    filter: brightness(1.5) contrast(1.2);
+    
+    transition: all 0.3s ease;
+}
+
+/* Optional: Make it light up even more when a user hovers over the section */
+.background-logo:hover {
+    opacity: 0.6;
+    filter: brightness(1.8) contrast(1.3);
+}
+
 .content-wrapper {
     max-width: 1200px;
     margin: 120px auto 60px auto;
