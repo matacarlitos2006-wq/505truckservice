@@ -2144,3 +2144,38 @@ body.user-is-tabbing input:focus {
     from { transform: translateY(-100%); }
     to { transform: translateY(0); }
 }
+
+/* new */ 
+
+/* Pristine baseline state before scroll trigger fires */
+.reveal-on-scroll {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 1s cubic-bezier(0.25, 1, 0.5, 1), 
+                transform 1s cubic-bezier(0.25, 1, 0.5, 1);
+    will-change: transform, opacity;
+}
+
+/* Active transition state added by JS */
+.reveal-on-scroll.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Typing Cursor Effect */
+.showcase-title::after {
+    content: '|';
+    color: #ff5500; /* Industrial Orange Cursor */
+    animation: cursor-blink 0.8s infinite steps(2);
+    margin-left: 4px;
+}
+
+/* Hide the blinking cursor line entirely once typing finishes */
+.showcase-title.typing-done::after {
+    display: none;
+}
+
+@keyframes cursor-blink {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
+}
