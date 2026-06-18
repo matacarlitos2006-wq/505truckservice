@@ -2147,30 +2147,87 @@ body.user-is-tabbing input:focus {
 
 /* new */ 
 
-/* Pristine baseline state before scroll trigger fires */
+/* Transparent Layout Wrapper */
+.brand-showcase-section {
+    background: transparent; /* No hidden structural color */
+    width: 100%;
+    padding: 90px 0; /* Generous breathing room above and below */
+    display: flex;
+    justify-content: center;
+}
+
+/* Master Width Contactor */
+.showcase-container {
+    width: 100%;
+    max-width: 1200px;
+    padding: 0 40px; /* Safe distance from the left and right walls */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 60px; /* Clean gap separating text from graphics */
+}
+
+.showcase-text-side {
+    flex: 1;
+    max-width: 550px;
+}
+
+/* Large Clean Typography */
+.showcase-title {
+    font-size: 3.8rem; /* Prominent heading presence */
+    font-weight: 800;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: -1px;
+    line-height: 1.1;
+    margin: 0 0 24px 0;
+    /* Removed the accent border block for a completely seamless look */
+}
+
+.showcase-description {
+    font-size: 1.3rem;
+    line-height: 1.6;
+    color: #cccccc;
+    margin: 0;
+}
+
+.showcase-image-side {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* Floating Clean Image Component */
+.showcase-img {
+    width: 100%;
+    max-width: 550px;
+    height: auto;
+    border-radius: 8px;
+    /* Box shadows and borders removed to keep the asset completely unboxed */
+}
+
+/* Entry Animation Control Hooks */
 .reveal-on-scroll {
     opacity: 0;
-    transform: translateY(40px);
+    transform: translateY(30px);
     transition: opacity 1s cubic-bezier(0.25, 1, 0.5, 1), 
                 transform 1s cubic-bezier(0.25, 1, 0.5, 1);
     will-change: transform, opacity;
 }
 
-/* Active transition state added by JS */
 .reveal-on-scroll.is-visible {
     opacity: 1;
     transform: translateY(0);
 }
 
-/* Typing Cursor Effect */
+/* Minimalist Typing Indicator */
 .showcase-title::after {
     content: '|';
-    color: #ff5500; /* Industrial Orange Cursor */
+    color: #ff5500;
     animation: cursor-blink 0.8s infinite steps(2);
     margin-left: 4px;
 }
 
-/* Hide the blinking cursor line entirely once typing finishes */
 .showcase-title.typing-done::after {
     display: none;
 }
@@ -2180,82 +2237,17 @@ body.user-is-tabbing input:focus {
     100% { opacity: 0; }
 }
 
-/* Section Container Wrapper */
-.brand-showcase-section {
-    background-color: #000000; /* Dark industrial background */
-    width: 100%;
-    padding: 80px 0; /* Creates generous vertical space above and below */
-    display: flex;
-    justify-content: center;
-}
-
-/* Master Grid Aligning the Two Sides */
-.showcase-container {
-    width: 100%;
-    max-width: 1200px; /* Limits expansion so content never hits the screen edges */
-    padding: 0 40px; /* Safe buffer zones away from the left and right walls */
-    display: flex;
-    align-items: center; /* Aligns text and image perfectly middle horizontally */
-    justify-content: space-between;
-    gap: 40px; /* Ensures text and image never collide on medium screens */
-}
-
-/* Left Content Column */
-.showcase-text-side {
-    flex: 1;
-    max-width: 550px; /* Keeps your description readable without stretching too wide */
-}
-
-/* Massive Title Design */
-.showcase-title {
-    font-size: 3.5rem; /* Super bold, eye-catching text size */
-    font-weight: 800;
-    color: #ffffff;
-    text-transform: uppercase;
-    letter-spacing: -1px;
-    line-height: 1.1;
-    margin: 0 0 24px 0;
-    border-left: 6px solid #ff5500; /* Industrial accent indicator */
-    padding-left: 16px;
-}
-
-/* Prominent Description Design */
-.showcase-description {
-    font-size: 1.25rem; /* Noticeably larger text for your description statement */
-    line-height: 1.6;
-    color: #cccccc; /* Slightly muted white to keep visual hierarchy sharp */
-    margin: 0;
-}
-
-/* Right Content Column */
-.showcase-image-side {
-    flex: 1;
-    display: flex;
-    justify-content: flex-end; /* Pin the image content towards the right side */
-}
-
-/* Oversized Responsive Image Component */
-.showcase-img {
-    width: 100%;
-    max-width: 550px; /* Scales the image up cleanly */
-    height: auto;
-    border-radius: 12px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6); /* Gives depth over the background */
-    border: 1px solid #1a1a1a;
-}
-
-/* Fluid Layout Adjustments for Tablet & Mobile Screens */
+/* Dynamic Responsive Stacking rules */
 @media (max-width: 900px) {
     .showcase-container {
-        flex-direction: column; /* Stack vertically if the screen runs out of space */
+        flex-direction: column;
         text-align: center;
         padding: 0 24px;
+        gap: 40px;
     }
 
     .showcase-title {
-        font-size: 2.5rem;
-        border-left: none;
-        padding-left: 0;
+        font-size: 2.6rem;
     }
 
     .showcase-text-side, .showcase-image-side {
@@ -2264,6 +2256,5 @@ body.user-is-tabbing input:focus {
 
     .showcase-image-side {
         justify-content: center;
-        margin-top: 20px;
     }
 }
